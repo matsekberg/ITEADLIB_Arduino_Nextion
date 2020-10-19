@@ -11,6 +11,9 @@
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
+ *
+ * Patched with Roy Livingston's 0.9.0 file.
+ *
  */
 #ifndef __NEXCONFIG_H__
 #define __NEXCONFIG_H__
@@ -24,7 +27,7 @@
  * Define DEBUG_SERIAL_ENABLE to enable debug serial. 
  * Comment it to disable debug serial. 
  */
-#define DEBUG_SERIAL_ENABLE
+//#define DEBUG_SERIAL_ENABLE
 
 /**
  * Define dbSerial for the output of debug messages. 
@@ -41,10 +44,12 @@
 #define dbSerialPrint(a)    dbSerial.print(a)
 #define dbSerialPrintln(a)  dbSerial.println(a)
 #define dbSerialBegin(a)    dbSerial.begin(a)
+#define dbSerialPrintf(...) dbSerial.printf(__VA_ARGS__)
 #else
 #define dbSerialPrint(a)    do{}while(0)
 #define dbSerialPrintln(a)  do{}while(0)
 #define dbSerialBegin(a)    do{}while(0)
+#define dbSerialPrintf(...) do{}while(0)
 #endif
 
 /**
