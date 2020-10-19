@@ -11,6 +11,9 @@
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
+ *
+ * Patched with Roy Livingston's v0.9.0 file.
+ *
  */
 #ifndef __NEXHARDWARE_H__
 #define __NEXHARDWARE_H__
@@ -28,7 +31,13 @@
  * 
  * @return true if success, false for failure. 
  */
-bool nexInit(void);
+bool nexInit(long baud = 9600);
+
+/**
+ * Set Nextion BAUD rate
+ * 
+ */
+void nexBAUD(long baud);
 
 /**
  * Listen touch event and calling callbacks attached before.
@@ -50,6 +59,17 @@ void nexLoop(NexTouch *nex_listen_list[]);
 bool recvRetNumber(uint32_t *number, uint32_t timeout = 100);
 uint16_t recvRetString(char *buffer, uint16_t len, uint32_t timeout = 100);
 void sendCommand(const char* cmd);
+boolean sendCommandWait(const char* cmd);
 bool recvRetCommandFinished(uint32_t timeout = 100);
 
+
+void dumpMsg(char *strbuf, int strbuflen, byte *numbuf);
+void parseRx(byte *p, int len);
+boolean getEvent(byte *p);
+boolean getResp(byte *p, uint32_t timeout);
+int getString(byte *p, int len, int timeout = 100);
+boolean getNumber(byte *p, int timeout = 100);
+
+
 #endif /* #ifndef __NEXHARDWARE_H__ */
+
